@@ -13,6 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Role {
   role_id   String     @id @default(uuid())
   role_name String
