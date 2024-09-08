@@ -9,4 +9,5 @@ if (envFound.error) {
 process.env.PORT = process.env.PORT || 8000;
 export default {
   port: parseInt(process.PORT) || 8000,
+  jwtSecret: process.env.JWT_SECERT,
 };

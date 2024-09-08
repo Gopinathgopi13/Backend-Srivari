@@ -13,7 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Role {
   role_id   String     @id @default(uuid())
   role_name String
@@ -56,21 +55,6 @@ model Address {
   updatedAt DateTime @updatedAt
 }
 
-model Product {
-  product_id   String           @id @default(uuid())
-  product_name String
-  description  String
-  category_id  String
-  price        Decimal
-  discount_id  String
-  inventory_id String
-  created_at   DateTime         @default(now())
-  updated_at   DateTime         @updatedAt
-  category     ProductCategory  @relation(fields: [category_id], references: [category_id])
-  discout      Discount         @relation(fields: [discount_id], references: [discount_id], onDelete: Cascade)
-  inventory    ProductInventory @relation(fields: [inventory_id], references: [inventory_id])
-}
-
 model ProductCategory {
   category_id   String    @id @default(uuid())
   category_name String
@@ -78,6 +62,21 @@ model ProductCategory {
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
   Product       Product[]
+}
+
+model Product {
+  product_id   String            @id @default(uuid())
+  product_name String
+  description  String
+  category_id  String
+  price        Decimal
+  discount_id  String?
+  inventory_id String?
+  created_at   DateTime          @default(now())
+  updated_at   DateTime          @updatedAt
+  category     ProductCategory   @relation(fields: [category_id], references: [category_id])
+  discout      Discount?         @relation(fields: [discount_id], references: [discount_id], onDelete: Cascade)
+  inventory    ProductInventory? @relation(fields: [inventory_id], references: [inventory_id])
 }
 
 model ProductInventory {

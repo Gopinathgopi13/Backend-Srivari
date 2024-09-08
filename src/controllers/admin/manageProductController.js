@@ -28,3 +28,16 @@ export const modifyProduct = async (req, res) => {
     res.status(500).json({ error: "Failed to update product" });
   }
 };
+
+export const createCategory = async (req, res) => {
+  try {
+    const product = await manageProductService.addCategory(req.body);
+    res.status(201).json({
+      messsage: "Categories creates successfully",
+      data: product,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to create categories" });
+  }
+};
+
